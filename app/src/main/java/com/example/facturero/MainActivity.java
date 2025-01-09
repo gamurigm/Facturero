@@ -99,16 +99,27 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void calculateTotal() {
-        double total = 0;
+        double subtotal = 0;
+
+        // Calcular subtotal
         for (ProductRow row : productRows) {
             try {
                 int cantidad = Integer.parseInt(row.cantidad.getText().toString());
                 double precio = Double.parseDouble(row.precio.getText().toString());
-                total += cantidad * precio;
+                subtotal += cantidad * precio;
             } catch (NumberFormatException e) {
                 // Ignorar filas con datos inválidos
             }
         }
+
+        // Calcular IVA (12%)
+        double iva = subtotal * 0.12;
+        // Calcular total
+        double total = subtotal + iva;
+
+        // Actualizar los TextViews con formato de dos decimales
+        subtotalTextView.setText(String.format(Locale.getDefault(), "%.2f", subtotal));
+        ivaTextView.setText(String.format(Locale.getDefault(), "%.2f", iva));
         totalTextView.setText(String.format(Locale.getDefault(), "%.2f", total));
     }
 

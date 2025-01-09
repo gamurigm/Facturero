@@ -4,10 +4,12 @@
     android:background="#FFFFFF">
 
     <LinearLayout
+        android:id="@+id/mainLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="16dp"
+        android:background="#FFFFFF">
 
         <!-- Logo y encabezado -->
         <LinearLayout
@@ -15,20 +17,20 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:paddingBottom="16dp">
+            android:paddingBottom="16dp"
+            android:background="#FFFFFF">
 
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TU LOGO AQUÍ"
                 android:textSize="18sp"
                 android:gravity="center"
-                android:background="#FFE4E1"
                 android:padding="16dp"
                 android:layout_weight="1" />
 
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="FACTURA\nNº 01234"
                 android:textSize="18sp"
@@ -41,7 +43,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="INFORMACIÓN DE CONTACTO"
-            android:background="#FFE4E1"
             android:padding="8dp"
             android:textStyle="bold"
             android:layout_marginBottom="8dp" />
@@ -51,6 +52,7 @@
             android:layout_height="48dp"
             android:hint="Nombre y Apellido"
             android:padding="8dp"
+            android:background="@android:color/transparent"
             android:contentDescription="Campo para ingresar el nombre y apellido" />
 
         <EditText
@@ -58,6 +60,7 @@
             android:layout_height="48dp"
             android:hint="Dirección"
             android:padding="8dp"
+            android:background="@android:color/transparent"
             android:contentDescription="Campo para ingresar la dirección" />
 
         <EditText
@@ -65,72 +68,75 @@
             android:layout_height="48dp"
             android:hint="Teléfono"
             android:padding="8dp"
-            android:contentDescription="Campo para ingresar el número de teléfono"
-            android:inputType="phone" />
+            android:background="@android:color/transparent"
+            android:inputType="phone"
+            android:contentDescription="Campo para ingresar el número de teléfono" />
 
         <!-- Tabla de descripción -->
         <TableLayout
+            android:id="@+id/tableLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:stretchColumns="1"
             android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp">
+            android:layout_marginBottom="16dp"
+            android:background="#FFFFFF">
 
-            <TableRow>
+            <TableRow
+                android:background="#FFFFFF">
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="DESCRIPCIÓN"
+                    android:textStyle="bold"
                     android:padding="8dp" />
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="CANTIDAD"
+                    android:textStyle="bold"
                     android:padding="8dp" />
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="PRECIO"
+                    android:textStyle="bold"
                     android:padding="8dp" />
-            </TableRow>
-
-            <TableRow>
-                <EditText
-                    android:layout_width="0dp"
-                    android:layout_height="48dp"
-                    android:hint="Producto"
-                    android:layout_weight="1"
-                    android:padding="8dp"
-                    android:contentDescription="Campo para ingresar el producto" />
-                <EditText
-                    android:id="@+id/cantidad1"
-                    android:layout_width="0dp"
-                    android:layout_height="48dp"
-                    android:hint="0"
-                    android:layout_weight="1"
-                    android:padding="8dp"
-                    android:inputType="number"
-                    android:contentDescription="Campo para ingresar la cantidad" />
-                <EditText
-                    android:id="@+id/precio1"
-                    android:layout_width="0dp"
-                    android:layout_height="48dp"
-                    android:hint="0.0"
-                    android:layout_weight="1"
-                    android:padding="8dp"
-                    android:inputType="numberDecimal"
-                    android:contentDescription="Campo para ingresar el precio" />
             </TableRow>
         </TableLayout>
 
-        <!-- Botón Calcular -->
-        <Button
-            android:id="@+id/btnCalcular"
+        <!-- Botones -->
+        <LinearLayout
+            android:id="@+id/buttonLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Calcular"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp" />
+            android:orientation="vertical"
+            android:background="#FFFFFF">
+
+            <Button
+                android:id="@+id/btnAddRow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Añadir Producto"
+                android:layout_marginBottom="8dp"/>
+
+            <Button
+                android:id="@+id/btnCalcular"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Calcular"
+                android:layout_marginBottom="8dp" />
+
+            <Button
+                android:id="@+id/btnGenerarImagen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Generar Imagen de Factura"
+                android:layout_marginBottom="8dp" />
+        </LinearLayout>
 
         <!-- Total -->
         <LinearLayout
@@ -138,12 +144,14 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="end"
-            android:paddingTop="8dp">
+            android:paddingTop="8dp"
+            android:background="#FFFFFF">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TOTAL"
+                android:textStyle="bold"
                 android:padding="8dp" />
 
             <TextView

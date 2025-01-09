@@ -25,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView totalTextView;
     private ArrayList<ProductRow> productRows;
     private LinearLayout mainLayout;
+    private TextView ivaTextView;
+    private TextView subtotalTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +35,11 @@ public class MainActivity extends AppCompatActivity {
 
         // Inicializar variables
         tableLayout = findViewById(R.id.tableLayout);
+
+        subtotalTextView = findViewById(R.id.subtotal);
+        ivaTextView = findViewById(R.id.iva);
         totalTextView = findViewById(R.id.total);
+
         mainLayout = findViewById(R.id.mainLayout);
         productRows = new ArrayList<>();
 

@@ -1,8 +1,9 @@
 package com.example.facturero;
 
 import android.graphics.Bitmap;
-import android.graphics.Canvas;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.widget.ImageButton;
 import android.os.Environment;
 import android.view.View;
 import android.widget.Button;
@@ -60,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void addNewRow() {
+        // Crear nueva fila
         TableRow row = new TableRow(this);
         row.setLayoutParams(new TableRow.LayoutParams(
                 TableRow.LayoutParams.MATCH_PARENT,
@@ -86,10 +88,30 @@ public class MainActivity extends AppCompatActivity {
         precio.setInputType(android.text.InputType.TYPE_CLASS_NUMBER |
                 android.text.InputType.TYPE_NUMBER_FLAG_DECIMAL);
 
-        // Añadir EditTexts a la fila
+        // Crear ImageButton para eliminar la fila
+        ImageButton btnEliminar = new ImageButton(this);
+        btnEliminar.setImageResource(android.R.drawable.ic_delete); // Ícono de eliminar
+        btnEliminar.setBackgroundColor(Color.TRANSPARENT); // Fondo transparente
+        btnEliminar.setPadding(8, 8, 8, 8); // Agregar relleno
+        btnEliminar.setLayoutParams(new TableRow.LayoutParams(
+                TableRow.LayoutParams.WRAP_CONTENT,
+                TableRow.LayoutParams.WRAP_CONTENT));
+
+        // Configurar acción para eliminar la fila
+        btnEliminar.setOnClickListener(v -> {
+            // Eliminar fila de la tabla y lista
+            tableLayout.removeView(row);
+            productRows.removeIf(productRow -> productRow.descripcion == descripcion);
+
+            // Recalcular totales
+            calculateTotal();
+        });
+
+        // Añadir componentes a la fila
         row.addView(descripcion);
         row.addView(cantidad);
         row.addView(precio);
+        row.addView(btnEliminar); // Agregar ImageButton para eliminar
 
         // Añadir fila a la tabla
         tableLayout.addView(row);
@@ -97,6 +119,8 @@ public class MainActivity extends AppCompatActivity {
         // Guardar referencia a la fila
         productRows.add(new ProductRow(descripcion, cantidad, precio));
     }
+
+
 
     private void calculateTotal() {
         double subtotal = 0;
@@ -122,8 +146,6 @@ public class MainActivity extends AppCompatActivity {
         ivaTextView.setText(String.format(Locale.getDefault(), "%.2f", iva));
         totalTextView.setText(String.format(Locale.getDefault(), "%.2f", total));
     }
-
-
 
     // Clase auxiliar para mantener referencias a los campos de cada fila
     private static class ProductRow {

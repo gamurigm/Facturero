@@ -16,8 +16,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.util.ArrayList;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
@@ -29,6 +29,10 @@ public class MainActivity extends AppCompatActivity {
     private TextView ivaTextView;
     private TextView subtotalTextView;
 
+    // Variable para llevar el número de factura
+    private int numeroFactura = 1; // Número inicial de factura
+    private TextView facturaNumeroTextView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,13 +40,16 @@ public class MainActivity extends AppCompatActivity {
 
         // Inicializar variables
         tableLayout = findViewById(R.id.tableLayout);
-
         subtotalTextView = findViewById(R.id.subtotal);
         ivaTextView = findViewById(R.id.iva);
         totalTextView = findViewById(R.id.total);
+        facturaNumeroTextView = findViewById(R.id.facturaNumero); // Referencia al TextView del número de factura
 
         mainLayout = findViewById(R.id.mainLayout);
         productRows = new ArrayList<>();
+
+        // Mostrar el número de factura en el TextView
+        actualizarNumeroFactura();
 
         // Botón para añadir nueva fila
         Button btnAddRow = findViewById(R.id.btnAddRow);
@@ -120,8 +127,6 @@ public class MainActivity extends AppCompatActivity {
         productRows.add(new ProductRow(descripcion, cantidad, precio));
     }
 
-
-
     private void calculateTotal() {
         double subtotal = 0;
 
@@ -192,6 +197,12 @@ public class MainActivity extends AppCompatActivity {
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
             fos.close();
 
+            // Incrementar el número de factura
+            numeroFactura++;
+
+            // Actualizar el número de factura en el TextView
+            actualizarNumeroFactura();
+
             Toast.makeText(this, "Factura guardada en Imágenes: " + fileName,
                     Toast.LENGTH_LONG).show();
 
@@ -199,5 +210,11 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "Error al guardar la factura: " + e.getMessage(),
                     Toast.LENGTH_LONG).show();
         }
+    }
+
+    // Método para actualizar el número de factura en el TextView
+    private void actualizarNumeroFactura() {
+        String numeroFacturaTexto = "Factura #" + numeroFactura;
+        facturaNumeroTextView.setText(numeroFacturaTexto);
     }
 }

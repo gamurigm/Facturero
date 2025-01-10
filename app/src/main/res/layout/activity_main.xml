@@ -6,6 +6,8 @@
     android:fillViewport="true"
     android:rotationY="0">
 
+
+
     <LinearLayout
         android:id="@+id/mainLayout"
         android:layout_width="match_parent"
@@ -13,6 +15,18 @@
         android:orientation="vertical"
         android:padding="16dp">
 
+        <TextView
+            android:id="@+id/facturaNumero"
+            android:layout_width="376dp"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:text="Factura #0001"
+            android:textAlignment="viewEnd"
+            android:textColor="#000000"
+            android:textSize="14sp" />
+
+
+        <!-- Información de contacto -->
         <ImageView
             android:id="@+id/logo"
             android:layout_width="120dp"
@@ -22,8 +36,6 @@
             android:contentDescription="Logo de la empresa"
             android:src="@drawable/bill" />
 
-
-        <!-- Información de contacto -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -56,6 +68,17 @@
             android:inputType="textPostalAddress"
             android:minHeight="48dp"
             android:padding="8dp" />
+        <EditText
+            android:id="@+id/IdEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:contentDescription="Campo para ingresar la dirección"
+            android:hint="Cédula / RUC"
+            android:importantForAutofill="no"
+            android:inputType="textPostalAddress"
+            android:minHeight="48dp"
+            android:padding="8dp" />
 
         <EditText
             android:id="@+id/phoneEditText"
@@ -83,7 +106,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.2"
+                    android:layout_weight="0"
                     android:padding="8dp"
                     android:text="DESCRIPCIÓN"
                     android:textSize="14sp"
